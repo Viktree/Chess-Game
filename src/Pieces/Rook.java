@@ -7,9 +7,10 @@ import ChessMain.ChessBoard;
  */
 public class Rook extends Piece{
 
-    public Rook(int x, int y){
-        super(x, y);
+    public Rook(int x, int y, String colour){
+        super(x, y, colour);
         this.symbol = "R";
+        this.classicImage = "/Pieces/" + colour +"_Rook_Classic.png";
     }
 
     public boolean isVaildMove(int i, int j) {

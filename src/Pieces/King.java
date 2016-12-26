@@ -6,10 +6,10 @@ import ChessMain.ChessBoard;
  * Created by vikram on 21/12/16.
  */
 public class King extends Piece {
-    public King(int x, int y){
-        super(x, y);
+    public King(int x, int y, String colour){
+        super(x, y, colour);
         this.symbol = "K";
-        this.classicImage = "";
+        this.classicImage = "/Pieces/" + colour +"_King_Classic.png";
     }
 
     public boolean isVaildMove(int i, int j) {

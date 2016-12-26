@@ -8,12 +8,14 @@ import ChessMain.ChessBoard;
 public abstract class Piece {
 
     public String symbol;
-    protected String classicImage;
+    public String classicImage;
+    private String colour;
     protected int x, y;
 
-    public Piece(int x, int y){
+    public Piece(int x, int y, String colour){
         this.x = x;
         this.y = y;
+        this.colour = colour;
         ChessBoard.Square[x][y] = this;
     }
 

@@ -1,18 +1,16 @@
 package GUI;
 
+import Pieces.*;
 import Pieces.Piece;
 import javafx.application.Application;
 
 import javafx.geometry.Insets;
-import javafx.geometry.VPos;
 
 import javafx.stage.Stage;
 
 import javafx.scene.Scene;
-import javafx.scene.canvas.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.image.ImageView;
 
 /**
@@ -29,7 +27,7 @@ public class ChessBoard extends Application {
         GridPane gridpane = createBoard();
 
         root.setCenter(gridpane);
-        primaryStage.setTitle("Chess World");
+        primaryStage.setTitle("Chess Board");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -65,27 +63,15 @@ public class ChessBoard extends Application {
     }
 
     private StackPane createTile(int i, int j){
-        Canvas canvas = new Canvas(70, 70);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-
         Piece p = ChessMain.ChessBoard.Square[i][j];
-        String s;
+        ImageView image;
+
         if (p != null){
-            s = " " + p.symbol + " ";
+            image = new ImageView(p.classicImage);
         } else {
-            s = "   ";
+            King king = new King(3, 4, "Black");
+            image = new ImageView(king.classicImage);
         }
-
-        gc.setTextAlign(TextAlignment.CENTER);
-        gc.setTextBaseline(VPos.CENTER);
-        gc.fillText(
-                s,
-                Math.round(canvas.getWidth()  / 2),
-                Math.round(canvas.getHeight() / 2)
-        );
-
-        ImageView image = new ImageView("https://raw.githubusercontent.com/ashish1294/ChessOOP/master/Chess/src/chess/Black_King.png");
-        image.autosize();
 
         StackPane layout = new StackPane();
 

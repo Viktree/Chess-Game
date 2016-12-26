@@ -6,9 +6,10 @@ import ChessMain.ChessBoard;
  * Created by vikram on 20/12/16.
  */
 public class Bishop extends Piece{
-    public Bishop(int x, int y){
-        super(x, y);
+    public Bishop(int x, int y, String colour){
+        super(x, y, colour);
         this.symbol = "B";
+        this.classicImage = "/Pieces/" + colour +"_Bishop_Classic.png";
     }
 
     public boolean isVaildMove(int i, int j) {

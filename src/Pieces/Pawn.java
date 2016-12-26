@@ -9,15 +9,10 @@ public class Pawn extends Piece{
 
     private String colour;
 
-    public Pawn(int x, int y){
-        super(x, y);
+    public Pawn(int x, int y, String colour){
+        super(x, y, colour);
         this.symbol = "p";
-
-        if(y == 6){
-            this.colour = "black";
-        } else {
-            this.colour = "white";
-        }
+        this.classicImage = "/Pieces/" + colour + "_Pawn_Classic.png";
     }
 
     public boolean isVaildMove(int i, int j) {
