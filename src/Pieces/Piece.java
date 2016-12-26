@@ -8,6 +8,7 @@ import ChessMain.ChessBoard;
 public abstract class Piece {
 
     public String symbol;
+    protected String classicImage;
     protected int x, y;
 
     public Piece(int x, int y){

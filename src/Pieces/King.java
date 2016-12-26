@@ -9,6 +9,7 @@ public class King extends Piece {
     public King(int x, int y){
         super(x, y);
         this.symbol = "K";
+        this.classicImage = "";
     }
 
     public boolean isVaildMove(int i, int j) {
