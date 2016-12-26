@@ -13,23 +13,24 @@ public class Rook extends Piece{
     }
 
     public boolean isVaildMove(int i, int j) {
+
         boolean hasPiece = ChessBoard.Square[i][j] != null;
-        if(j == y){
-            if(i+1 < x){
-                return !hasPiece && isVaildMove(i + 1,j);
-            } else if(i-1 > x){
-                return !hasPiece && isVaildMove(i - 1,j);
+
+        if(j == y) {
+            if(Math.abs(x-i) > 1){
+                int unitCloser = (x-i)/Math.abs(x-i);
+                return !hasPiece && isVaildMove(i + unitCloser, j);
             }
+            return !hasPiece;
         } else if (i == x) {
-            if (j + 1 < y) {
-                return !hasPiece && isVaildMove(i, j + 1);
-            } else if (j - 1 > y) {
-                return !hasPiece && isVaildMove(i, j - 1);
+            if(Math.abs(y-j) > 1){
+                int unitCloser = (y-j)/Math.abs(y-j);
+                return !hasPiece && isVaildMove(i, j + unitCloser);
             }
-        } else {
-            return false;
+            return !hasPiece;
         }
-        return !hasPiece;
+
+        return false;
     }
 
 }

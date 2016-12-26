@@ -13,33 +13,33 @@ public class Queen extends Piece {
 
     public boolean isVaildMove(int i, int j) {
         boolean hasPiece = ChessBoard.Square[i][j] != null;
-        if(j == y){
-            if(i+1 < x){
-                return !hasPiece && isVaildMove(i + 1,j);
-            } else if(i-1 > x){
-                return !hasPiece && isVaildMove(i - 1,j);
+
+        if(j == y) {
+            if(Math.abs(x-i) > 1){
+                int unitCloserX = (x-i)/Math.abs(x-i);
+                return !hasPiece && isVaildMove(i + unitCloserX, j);
             }
-        } else if (i == x) {
-            if (j + 1 < y) {
-                return !hasPiece && isVaildMove(i, j + 1);
-            } else if (j - 1 > y) {
-                return !hasPiece && isVaildMove(i, j - 1);
-            }
+            return !hasPiece;
         } else if(j-i == y-x){
-            if(i+1 < x){
-                return !hasPiece && isVaildMove(i + 1,j + 1);
-            } else if(i-1 > x){
-                return !hasPiece && isVaildMove(i - 1,j - 1);
+            if(Math.abs(x-i) > 1){
+                int unitCloserX = (x-i)/Math.abs(x-i);
+                return !hasPiece && isVaildMove(i + unitCloserX, j + unitCloserX);
             }
+            return !hasPiece;
+        } else if (i == x) {
+            if(Math.abs(y-j) > 1){
+                int unitCloserY = (y-j)/Math.abs(y-j);
+                return !hasPiece && isVaildMove(i, j + unitCloserY);
+            }
+            return !hasPiece;
         } else if (i+j == y+x) {
-            if (j + 1 < y) {
-                return !hasPiece && isVaildMove(i - 1, j + 1);
-            } else if (j - 1 > y) {
-                return !hasPiece && isVaildMove(i + 1, j - 1);
+            int unitCloserY = (y-j)/Math.abs(y-j);
+            if (Math.abs(y-j) > 1) {
+                return !hasPiece && isVaildMove(i - unitCloserY, j + unitCloserY);
             }
-        } else {
-            return false;
+            return !hasPiece;
         }
-        return !hasPiece;
+
+        return false;
     }
 }

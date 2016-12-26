@@ -16,7 +16,7 @@ public class ChessBoard {
 
     private ChessBoard(){
         // Creates Squares for the Board
-        for(int i  = 7; i>=0; i--){
+        for(int i  = 7; i>= 0; i--){
             for(int j = 0; j <=7; j++){
                 ChessBoard.Square[i][j] = null;
             }
@@ -32,8 +32,9 @@ public class ChessBoard {
     }
 
     public String show(){
-        String board = " --- --- --- --- --- --- --- --- \n";
+        String board = "\n   --- --- --- --- --- --- --- --- \n";
         for(int i = 7; i>=0; i--){
+                board += i + " ";
             for(int j = 0; j<=7; j++){
                 board += "|";
                 Piece p = ChessBoard.Square[j][i];
@@ -45,17 +46,19 @@ public class ChessBoard {
             }
             board += "|\n";
 
-            board += " --- --- --- --- --- --- --- --- \n";
+            board += "   --- --- --- --- --- --- --- --- \n";
         }
+        board += "    0   1   2   3   4   5   6   7  \n";
         return board;
     }
 
     public static void main(String[] args) {
         ChessBoard board = ChessBoard.getInstance();
-        Knight p = ChessBoard.whitePlayer.b_knight;
+        Pawn p = ChessBoard.whitePlayer.a_pawn;
+        p.moveto(3, 4);
         System.out.println(board.show());
-        for(int i = 7; i>=0; i--){
-            for(int j = 0; j<=7; j++) {
+        for(int i = 7; i >= 0; i--){
+            for(int j = 0; j <= 7; j++) {
                 if(p.isVaildMove(i, j)){
                     System.out.println(i+ " " + j);
                 }

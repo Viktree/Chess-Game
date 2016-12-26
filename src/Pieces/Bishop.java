@@ -12,23 +12,23 @@ public class Bishop extends Piece{
     }
 
     public boolean isVaildMove(int i, int j) {
+
         boolean hasPiece = ChessBoard.Square[i][j] != null;
 
         if(j-i == y-x){
-            if(i+1 < x){
-                return !hasPiece && isVaildMove(i + 1,j + 1);
-            } else if(i-1 > x){
-                return !hasPiece && isVaildMove(i - 1,j - 1);
+            if(Math.abs(x-i) > 1){
+                int unitCloser = (x-i)/Math.abs(x-i);
+                return !hasPiece && isVaildMove(i + unitCloser, j + unitCloser);
             }
+            return !hasPiece;
         } else if (i+j == y+x) {
-            if (j + 1 < y) {
-                return !hasPiece && isVaildMove(i - 1, j + 1);
-            } else if (j - 1 > y) {
-                return !hasPiece && isVaildMove(i + 1, j - 1);
+            if (Math.abs(y-j) > 1) {
+                int unitCloser = (y-j)/Math.abs(y-j);
+                return !hasPiece && isVaildMove(i - unitCloser, j + unitCloser);
             }
-        } else {
-            return false;
+            return !hasPiece;
         }
-        return !hasPiece;
+
+        return false;
     }
 }

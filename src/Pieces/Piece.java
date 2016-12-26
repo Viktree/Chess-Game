@@ -7,6 +7,7 @@ import ChessMain.ChessBoard;
  */
 public abstract class Piece {
 
+    public String symbol;
     protected int x, y;
 
     public Piece(int x, int y){
@@ -14,8 +15,6 @@ public abstract class Piece {
         this.y = y;
         ChessBoard.Square[x][y] = this;
     }
-
-    public String symbol;
 
     public abstract boolean isVaildMove(int i, int j);
 
