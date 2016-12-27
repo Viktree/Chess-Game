@@ -1,6 +1,6 @@
 package Pieces;
 
-import ChessMain.ChessBoard;
+import ChessMain.BoardManager;
 
 /**
  * Created by vikram on 21/12/16.
@@ -16,7 +16,7 @@ public class King extends Piece {
         boolean validx = (i == x) || (i - 1 == x) || (i + 1 == x);
         boolean validy = (j == y) || (j - 1 == y) || (j + 1 == y);
         boolean notSameSquare = (i == x) && (j == y);
-        boolean hasPiece = ChessBoard.Square[i][j] != null;
+        boolean hasPiece = BoardManager.Square[i][j] != null;
 
         return validx && validy && !notSameSquare &&  !hasPiece;
     }

@@ -1,6 +1,6 @@
 package Pieces;
 
-import ChessMain.ChessBoard;
+import ChessMain.BoardManager;
 
 /**
  * Created by vikram on 20/12/16.
@@ -13,7 +13,7 @@ public class Queen extends Piece {
     }
 
     public boolean isVaildMove(int i, int j) {
-        boolean hasPiece = ChessBoard.Square[i][j] != null;
+        boolean hasPiece = BoardManager.Square[i][j] != null;
 
         if(j == y) {
             if(Math.abs(x-i) > 1){

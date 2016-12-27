@@ -4,21 +4,20 @@ package ChessMain;
  * Created by vikram on 20/12/16.
  */
 
-import java.util.*;
 import Pieces.*;
 
-public class ChessBoard {
+public class BoardManager {
 
     public static Piece[][] Square = new Piece[8][8];
-    private static ChessBoard instance = new ChessBoard();
+    private static BoardManager instance = new BoardManager();
 
     private static Player whitePlayer, blackPlayer;
 
-    private ChessBoard(){
-        // Creates Squares for the Board
+    private BoardManager(){
+        // Creates Squares for the BoardManager
         for(int i  = 7; i>= 0; i--){
             for(int j = 0; j <=7; j++){
-                ChessBoard.Square[i][j] = null;
+                BoardManager.Square[i][j] = null;
             }
         }
 
@@ -27,17 +26,17 @@ public class ChessBoard {
         blackPlayer = Player.newBlackPlayer();
     }
 
-    public static ChessBoard getInstance(){
+    public static BoardManager getInstance(){
         return instance;
     }
 
-    public String show(){
+    private String show(){
         String board = "\n   --- --- --- --- --- --- --- --- \n";
         for(int i = 7; i>=0; i--){
                 board += i + " ";
             for(int j = 0; j<=7; j++){
                 board += "|";
-                Piece p = ChessBoard.Square[j][i];
+                Piece p = BoardManager.Square[j][i];
                 if (p != null){
                     board += " " + p.symbol + " ";
                 } else {
@@ -53,9 +52,9 @@ public class ChessBoard {
     }
 
     public static void main(String[] args) {
-        ChessBoard board = ChessBoard.getInstance();
-        Pawn p = ChessBoard.whitePlayer.a_pawn;
-        p.moveto(3, 4);
+        BoardManager board = BoardManager.getInstance();
+        Pawn p = BoardManager.whitePlayer.a_pawn;
+        //p.moveTo(3, 4);
         System.out.println(board.show());
         for(int i = 7; i >= 0; i--){
             for(int j = 0; j <= 7; j++) {
@@ -65,4 +64,5 @@ public class ChessBoard {
             }
         }
     }
+
 }

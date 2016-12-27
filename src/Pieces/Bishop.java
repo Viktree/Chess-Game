@@ -1,6 +1,6 @@
 package Pieces;
 
-import ChessMain.ChessBoard;
+import ChessMain.BoardManager;
 
 /**
  * Created by vikram on 20/12/16.
@@ -14,7 +14,7 @@ public class Bishop extends Piece{
 
     public boolean isVaildMove(int i, int j) {
 
-        boolean hasPiece = ChessBoard.Square[i][j] != null;
+        boolean hasPiece = BoardManager.Square[i][j] != null;
 
         if(j-i == y-x){
             if(Math.abs(x-i) > 1){
