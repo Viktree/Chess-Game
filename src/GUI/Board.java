@@ -1,27 +1,26 @@
 package GUI;
 
-import ChessMain.BoardManager;
 import Pieces.Piece;
-
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-
-import java.util.Observable;
-import java.util.Observer;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 /**
- * Created by vikram on 26/12/16.
+ * Created by vikram on 29/12/16.
  */
-public class Board extends GridPane implements Observer {
+public class Board extends GridPane {
 
-    private boolean clickable = false;
+    public boolean toBeReset = false;
+    public Piece currentPiece = null;
 
-    public Board(){
+    private Piece[][] board;
+
+    public Board(Piece[][] board){
+        this.board = board;
         this.setPadding(new Insets(7));
         this.setHgap(8);
         this.setVgap(8);
@@ -47,7 +46,7 @@ public class Board extends GridPane implements Observer {
     private StackPane createTile(int i, int j){
         StackPane tile = new StackPane();
 
-        Piece p = BoardManager.Square[i][j];
+        Piece p = this.board[i][j];
 
         ImageView image = new ImageView();
 
@@ -64,62 +63,44 @@ public class Board extends GridPane implements Observer {
             tile.setStyle("-fx-background-color: darkgray");
         }
 
-        image.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        image.setOnMouseClicked(this.pieceOnClick(tile, p));
+        tile.getChildren().addAll(image);
+        tile.setOnMouseClicked(this.tileOnClick(tile, i, j));
+
+        return tile;
+    }
+
+    private EventHandler<MouseEvent> tileOnClick(StackPane tile, int i, int j){
+        return event -> {
+            boolean samePanel = tile.getStyle().contains("-fx-background-color: red");
+
+            if(pieceSelected() && !samePanel){
+                tile.setStyle("-fx-background-color: greenyellow");
+                currentPiece.moveTo(i, j);
+                toBeReset = true;
+            }
+        };
+    }
+
+    private EventHandler<MouseEvent> pieceOnClick(StackPane tile, Piece p){
+        return new EventHandler<MouseEvent>() {
 
             String initalStyle = tile.getStyle();
 
             @Override
             public void handle(MouseEvent event) {
-
                 if (tile.getStyle() == initalStyle){
                     tile.setStyle("-fx-background-color: red");
-                    //clickable = true;
-
-                    System.out.println(p.symbol);
-                    for(int i  = 7; i>= 0; i--){
-                        for(int j = 0; j <=7; j++){
-                            if (p.isVaildMove(i,j)){
-                                System.out.println(i + ", " + j);
-                            }
-                        }
-                    }
+                    currentPiece = p;
                 } else {
                     tile.setStyle(initalStyle);
                 }
-
             }
-        });
-
-        tile.getChildren().addAll(image);
-
-        tile.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                boolean samePanel = tile.getStyle().contains("-fx-background-color: red");
-
-                if(clickable && !samePanel){
-                    tile.setStyle("-fx-background-color: greenyellow");
-                    clickable = false;
-                }
-            }
-        });
-
-        return tile;
+        };
     }
 
-
-    /**
-     * This method is called whenever the observed object is changed. An
-     * application calls an <tt>Observable</tt> object's
-     * <code>notifyObservers</code> method to have all the object's
-     * observers notified of the change.
-     *
-     * @param o   the observable object.
-     * @param arg an argument passed to the <code>notifyObservers</code>
-     */
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("hello!");
+    private boolean pieceSelected(){
+        return currentPiece == null;
     }
+
 }

@@ -14,19 +14,18 @@ public class Pawn extends Piece{
     }
 
     public boolean isVaildMove(int i, int j) {
-        boolean hasPiece = BoardManager.Square[i][j] != null;
 
         if(this.colour == "White"){
             if (i == x && j == y + 1) {
-                return !hasPiece;
+                return !BoardManager.hasPiece(i, j);
             } else if (i == x && y == 1 && j == 3) {
-                return !hasPiece;
+                return !BoardManager.hasPiece(i, j);
             }
         } else if(this.colour == "Black"){
             if (i == x && j == y - 1) {
-                return !hasPiece;
+                return !BoardManager.hasPiece(i, j);
             } else if (i == x && y == 6 && j == 4) {
-                return !hasPiece;
+                return !BoardManager.hasPiece(i, j);
             }
         }
 

@@ -14,7 +14,7 @@ public class Knight extends Piece{
 
     public boolean isVaildMove(int i, int j) {
         if((Math.abs(x-i) == 1 & Math.abs(y-j) == 2) || (Math.abs(x-i) == 2 & Math.abs(y-j) == 1)){
-            return BoardManager.Square[i][j] == null;
+            return !BoardManager.hasPiece(i, j);
         }
         return false;
     }

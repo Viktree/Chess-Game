@@ -1,46 +1,46 @@
 package GUI;
 
 import ChessMain.BoardManager;
-import Pieces.Piece;
-import Pieces.*;
+
 import javafx.application.Application;
-
-import javafx.beans.Observable;
-import javafx.stage.Stage;
-
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
-import java.util.Observer;
+import javafx.stage.Stage;
 
 /**
  * Created by vikram on 26/12/16.
  */
 public class Main extends Application {
 
-    private Board chessBoard;
-
-    public Main(){
-        this.chessBoard = new Board();
-
-        Piece p = BoardManager.Square[0][7];
-        p.addObserver(this.chessBoard);
-        p.moveTo(3, 4);
-
-    }
+    private BoardManager controller = BoardManager.getInstance();
+    private Board chessBoard = controller.getCurrBoard();
 
     @Override
     public void start(Stage primaryStage) {
         BorderPane root = new BorderPane();
         root.autosize();
-        Scene scene = new Scene(root);
-
         root.setCenter(chessBoard);
-        primaryStage.setTitle("Chess BoardManager");
-        primaryStage.setScene(scene);
+
+        chessBoard.setOnMouseClicked(this.reloadBoard(primaryStage));
+
+        primaryStage.setTitle("Chess Board");
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
+    }
+
+    private EventHandler<MouseEvent> reloadBoard(Stage stage){
+        return event -> {
+            if (chessBoard.toBeReset) {
+                chessBoard = controller.getCurrBoard();
+                start(stage);
+            }
+        };
     }
 
     public static void main(String[] args) {
         launch(args);
     }
+
 }

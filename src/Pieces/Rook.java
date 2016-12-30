@@ -15,20 +15,18 @@ public class Rook extends Piece{
 
     public boolean isVaildMove(int i, int j) {
 
-        boolean hasPiece = BoardManager.Square[i][j] != null;
-
         if(j == y) {
             if(Math.abs(x-i) > 1){
                 int unitCloser = (x-i)/Math.abs(x-i);
-                return !hasPiece && isVaildMove(i + unitCloser, j);
+                return !BoardManager.hasPiece(i, j) && isVaildMove(i + unitCloser, j);
             }
-            return !hasPiece;
+            return !BoardManager.hasPiece(i, j);
         } else if (i == x) {
             if(Math.abs(y-j) > 1){
                 int unitCloser = (y-j)/Math.abs(y-j);
-                return !hasPiece && isVaildMove(i, j + unitCloser);
+                return !BoardManager.hasPiece(i, j) && isVaildMove(i, j + unitCloser);
             }
-            return !hasPiece;
+            return !BoardManager.hasPiece(i, j);
         }
 
         return false;

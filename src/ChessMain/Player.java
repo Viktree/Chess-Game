@@ -2,6 +2,8 @@ package ChessMain;
 
 import Pieces.*;
 
+import java.util.ArrayList;
+
 /**
  * Created by vikram on 24/12/16.
  */
@@ -10,6 +12,7 @@ public class Player {
     // Two Types of players
     private static Player white = new Player(0, 1, "White");
     private static Player black = new Player(7, 6, "Black");
+    public ArrayList<Piece> pieces = new ArrayList<>();
 
     // Player's Pieces
     King king;

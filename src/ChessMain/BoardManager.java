@@ -1,42 +1,50 @@
 package ChessMain;
 
-/**
- * Created by vikram on 20/12/16.
- */
-
+import GUI.Board;
 import Pieces.*;
 
+/**
+ * Created by vikram on 29/12/16.
+ */
 public class BoardManager {
 
-    public static Piece[][] Square = new Piece[8][8];
+    private static Piece[][] Square = new Piece[8][8];
     private static BoardManager instance = new BoardManager();
-
-    private static Player whitePlayer, blackPlayer;
+    private Player whitePlayer, blackPlayer;
 
     private BoardManager(){
-        // Creates Squares for the BoardManager
-        for(int i  = 7; i>= 0; i--){
-            for(int j = 0; j <=7; j++){
-                BoardManager.Square[i][j] = null;
-            }
-        }
 
-        // Players
         whitePlayer = Player.newWhitePlayer();
         blackPlayer = Player.newBlackPlayer();
     }
 
     public static BoardManager getInstance(){
-        return instance;
+        return BoardManager.instance;
     }
 
-    private String show(){
+    public static void addPiece(int i, int j, Piece piece){
+        BoardManager.Square[i][j] = piece;
+    }
+
+    public static void removePiece(Piece piece){
+        BoardManager.Square[piece.x][piece.y] = null;
+    }
+
+    public static Board getCurrBoard(){
+        return new Board(BoardManager.Square);
+    }
+
+    public static boolean hasPiece(int i, int j){
+        return BoardManager.Square[i][j] == null;
+    }
+
+    public String show(){
         String board = "\n   --- --- --- --- --- --- --- --- \n";
         for(int i = 7; i>=0; i--){
-                board += i + " ";
+            board += i + " ";
             for(int j = 0; j<=7; j++){
                 board += "|";
-                Piece p = BoardManager.Square[j][i];
+                Piece p = this.Square[j][i];
                 if (p != null){
                     board += " " + p.symbol + " ";
                 } else {
@@ -52,17 +60,8 @@ public class BoardManager {
     }
 
     public static void main(String[] args) {
-        BoardManager board = BoardManager.getInstance();
-        Pawn p = BoardManager.whitePlayer.a_pawn;
-        //p.moveTo(3, 4);
+        BoardManager board = BoardManager.instance;
         System.out.println(board.show());
-        for(int i = 7; i >= 0; i--){
-            for(int j = 0; j <= 7; j++) {
-                if(p.isVaildMove(i, j)){
-                    System.out.println(i+ " " + j);
-                }
-            }
-        }
-    }
 
+    }
 }
