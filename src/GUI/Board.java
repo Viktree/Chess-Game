@@ -46,12 +46,12 @@ public class Board extends GridPane {
     private StackPane createTile(int i, int j){
         StackPane tile = new StackPane();
 
-        Piece p = this.board[i][j];
+        Piece piece = this.board[i][j];
 
         ImageView image = new ImageView();
 
-        if (p != null){
-            image = new ImageView(p.classicImage);
+        if (piece != null){
+            image = new ImageView(piece.classicImage);
         }
 
         image.setFitHeight(70.0);
@@ -63,7 +63,7 @@ public class Board extends GridPane {
             tile.setStyle("-fx-background-color: darkgray");
         }
 
-        image.setOnMouseClicked(this.pieceOnClick(tile, p));
+        image.setOnMouseClicked(this.pieceOnClick(tile, piece));
         tile.getChildren().addAll(image);
         tile.setOnMouseClicked(this.tileOnClick(tile, i, j));
 

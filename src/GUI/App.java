@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 /**
  * Created by vikram on 26/12/16.
  */
-public class Main extends Application {
+public class App extends Application {
 
     private BoardManager controller = BoardManager.getInstance();
     private Board chessBoard = controller.getCurrBoard();
