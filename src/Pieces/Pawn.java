@@ -17,15 +17,15 @@ public class Pawn extends Piece{
 
         if(this.colour == "White"){
             if (i == x && j == y + 1) {
-                return !BoardManager.hasPiece(i, j);
+                return this.board.squareIsFree(i, j);
             } else if (i == x && y == 1 && j == 3) {
-                return !BoardManager.hasPiece(i, j);
+                return this.board.squareIsFree(i, j);
             }
         } else if(this.colour == "Black"){
             if (i == x && j == y - 1) {
-                return !BoardManager.hasPiece(i, j);
+                return this.board.squareIsFree(i, j);
             } else if (i == x && y == 6 && j == 4) {
-                return !BoardManager.hasPiece(i, j);
+                return this.board.squareIsFree(i, j);
             }
         }
 

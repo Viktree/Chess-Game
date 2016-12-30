@@ -13,19 +13,20 @@ public class Bishop extends Piece{
     }
 
     public boolean isVaildMove(int i, int j) {
+        boolean squareIsFree = this.board.squareIsFree(i, j);
 
         if(j-i == y-x){
             if(Math.abs(x-i) > 1){
                 int unitCloser = (x-i)/Math.abs(x-i);
-                return !BoardManager.hasPiece(i, j) && isVaildMove(i + unitCloser, j + unitCloser);
+                return squareIsFree && isVaildMove(i + unitCloser, j + unitCloser);
             }
-            return !BoardManager.hasPiece(i, j);
+            return squareIsFree;
         } else if (i+j == y+x) {
             if (Math.abs(y-j) > 1) {
                 int unitCloser = (y-j)/Math.abs(y-j);
-                return !BoardManager.hasPiece(i, j) && isVaildMove(i - unitCloser, j + unitCloser);
+                return squareIsFree && isVaildMove(i - unitCloser, j + unitCloser);
             }
-            return !BoardManager.hasPiece(i, j);
+            return squareIsFree;
         }
 
         return false;

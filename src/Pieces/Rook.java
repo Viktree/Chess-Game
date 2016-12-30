@@ -18,15 +18,15 @@ public class Rook extends Piece{
         if(j == y) {
             if(Math.abs(x-i) > 1){
                 int unitCloser = (x-i)/Math.abs(x-i);
-                return !BoardManager.hasPiece(i, j) && isVaildMove(i + unitCloser, j);
+                return this.board.squareIsFree(i, j) && isVaildMove(i + unitCloser, j);
             }
-            return !BoardManager.hasPiece(i, j);
+            return this.board.squareIsFree(i, j);
         } else if (i == x) {
             if(Math.abs(y-j) > 1){
                 int unitCloser = (y-j)/Math.abs(y-j);
-                return !BoardManager.hasPiece(i, j) && isVaildMove(i, j + unitCloser);
+                return this.board.squareIsFree(i, j) && isVaildMove(i, j + unitCloser);
             }
-            return !BoardManager.hasPiece(i, j);
+            return this.board.squareIsFree(i, j);
         }
 
         return false;

@@ -14,8 +14,8 @@ import javafx.scene.layout.StackPane;
  */
 public class Board extends GridPane {
 
-    public boolean toBeReset = false;
-    public Piece currentPiece = null;
+    boolean toBeReset = false;
+    private Piece currentPiece = null;
 
     private Piece[][] board;
 
@@ -46,12 +46,12 @@ public class Board extends GridPane {
     private StackPane createTile(int i, int j){
         StackPane tile = new StackPane();
 
-        Piece piece = this.board[i][j];
+        Piece p = this.board[i][j];
 
         ImageView image = new ImageView();
 
-        if (piece != null){
-            image = new ImageView(piece.classicImage);
+        if (p != null){
+            image = new ImageView(p.classicImage);
         }
 
         image.setFitHeight(70.0);
@@ -63,7 +63,7 @@ public class Board extends GridPane {
             tile.setStyle("-fx-background-color: darkgray");
         }
 
-        image.setOnMouseClicked(this.pieceOnClick(tile, piece));
+        image.setOnMouseClicked(this.pieceOnClick(tile, p));
         tile.getChildren().addAll(image);
         tile.setOnMouseClicked(this.tileOnClick(tile, i, j));
 
@@ -71,18 +71,23 @@ public class Board extends GridPane {
     }
 
     private EventHandler<MouseEvent> tileOnClick(StackPane tile, int i, int j){
-        return event -> {
-            boolean samePanel = tile.getStyle().contains("-fx-background-color: red");
+        return new EventHandler<MouseEvent>() {
 
-            if(pieceSelected() && !samePanel){
-                tile.setStyle("-fx-background-color: greenyellow");
-                currentPiece.moveTo(i, j);
-                toBeReset = true;
+            @Override
+            public void handle(MouseEvent event) {
+
+                boolean samePanel = tile.getStyle().contains("-fx-background-color: red");
+
+                if (pieceSelected() && !samePanel) {
+                    tile.setStyle("-fx-background-color: greenyellow");
+                    currentPiece.moveTo(i, j);
+                    toBeReset = true;
+                }
             }
         };
     }
 
-    private EventHandler<MouseEvent> pieceOnClick(StackPane tile, Piece p){
+    private EventHandler<MouseEvent> pieceOnClick(StackPane tile, Piece piece){
         return new EventHandler<MouseEvent>() {
 
             String initalStyle = tile.getStyle();
@@ -91,16 +96,26 @@ public class Board extends GridPane {
             public void handle(MouseEvent event) {
                 if (tile.getStyle() == initalStyle){
                     tile.setStyle("-fx-background-color: red");
-                    currentPiece = p;
+                    currentPiece = piece;
+                    System.out.println(piece.symbol);
+                    for(int i  = 7; i>= 0; i--){
+                        for(int j = 0; j <=7; j++){
+                            if (piece.isVaildMove(i,j)){
+                                System.out.println(i + " " + j);
+                            }
+                        }
+                    }
+
                 } else {
                     tile.setStyle(initalStyle);
+                    toBeReset = true;
                 }
             }
         };
     }
 
     private boolean pieceSelected(){
-        return currentPiece == null;
+        return currentPiece != null;
     }
 
 }

@@ -18,6 +18,6 @@ public class King extends Piece {
         boolean notSameSquare = (i == x) && (j == y);
 
 
-        return validx && validy && !notSameSquare &&  !BoardManager.hasPiece(i, j);
+        return validx && validy && !notSameSquare &&  this.board.squareIsFree(i, j);
     }
 }

@@ -10,7 +10,7 @@ public class BoardManager {
 
     private static Piece[][] Square = new Piece[8][8];
     private static BoardManager instance = new BoardManager();
-    private Player whitePlayer, blackPlayer;
+    private static Player whitePlayer, blackPlayer;
 
     private BoardManager(){
 
@@ -34,7 +34,7 @@ public class BoardManager {
         return new Board(BoardManager.Square);
     }
 
-    public static boolean hasPiece(int i, int j){
+    public static boolean squareIsFree(int i, int j){
         return BoardManager.Square[i][j] == null;
     }
 
@@ -62,6 +62,13 @@ public class BoardManager {
     public static void main(String[] args) {
         BoardManager board = BoardManager.instance;
         System.out.println(board.show());
-
+        Pawn e4 = BoardManager.whitePlayer.e_pawn;
+        for(int i =7; i>=0;i--){
+            for(int j=0; j<=7; j++){
+                if(e4.isVaildMove(i,j)){
+                    System.out.println(i + " " + j);
+                }
+            }
+        }
     }
 }

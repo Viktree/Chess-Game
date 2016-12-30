@@ -18,16 +18,16 @@ public class App extends Application {
     private Board chessBoard = controller.getCurrBoard();
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) {
         BorderPane root = new BorderPane();
         root.autosize();
         root.setCenter(chessBoard);
 
-        chessBoard.setOnMouseClicked(this.reloadBoard(primaryStage));
+        chessBoard.setOnMouseClicked(this.reloadBoard(stage));
 
-        primaryStage.setTitle("Chess Board");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        stage.setTitle("Chess Board");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     private EventHandler<MouseEvent> reloadBoard(Stage stage){

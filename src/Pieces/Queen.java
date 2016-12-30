@@ -17,27 +17,27 @@ public class Queen extends Piece {
         if(j == y) {
             if(Math.abs(x-i) > 1){
                 int unitCloserX = (x-i)/Math.abs(x-i);
-                return !BoardManager.hasPiece(i, j) && isVaildMove(i + unitCloserX, j);
+                return this.board.squareIsFree(i, j) && isVaildMove(i + unitCloserX, j);
             }
-            return !BoardManager.hasPiece(i, j) ;
+            return this.board.squareIsFree(i, j) ;
         } else if(j-i == y-x){
             if(Math.abs(x-i) > 1){
                 int unitCloserX = (x-i)/Math.abs(x-i);
-                return !BoardManager.hasPiece(i, j) && isVaildMove(i + unitCloserX, j + unitCloserX);
+                return this.board.squareIsFree(i, j) && isVaildMove(i + unitCloserX, j + unitCloserX);
             }
-            return !BoardManager.hasPiece(i, j);
+            return this.board.squareIsFree(i, j);
         } else if (i == x) {
             if(Math.abs(y-j) > 1){
                 int unitCloserY = (y-j)/Math.abs(y-j);
-                return !BoardManager.hasPiece(i, j) && isVaildMove(i, j + unitCloserY);
+                return this.board.squareIsFree(i, j) && isVaildMove(i, j + unitCloserY);
             }
-            return !BoardManager.hasPiece(i, j);
+            return this.board.squareIsFree(i, j);
         } else if (i+j == y+x) {
             int unitCloserY = (y-j)/Math.abs(y-j);
             if (Math.abs(y-j) > 1) {
-                return !BoardManager.hasPiece(i, j) && isVaildMove(i - unitCloserY, j + unitCloserY);
+                return this.board.squareIsFree(i, j) && isVaildMove(i - unitCloserY, j + unitCloserY);
             }
-            return !BoardManager.hasPiece(i, j);
+            return this.board.squareIsFree(i, j);
         }
 
         return false;
